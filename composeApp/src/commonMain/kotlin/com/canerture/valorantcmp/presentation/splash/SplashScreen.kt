@@ -4,7 +4,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -31,21 +33,22 @@ class SplashScreen : Screen {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(ValorantTheme.colors.primary),
+                .background(ValorantTheme.colors.secondary),
             contentAlignment = Alignment.Center
         ) {
             Image(
                 modifier = Modifier
-                    .widthIn(max = 400.dp)
-                    .background(ValorantTheme.colors.primary)
-                    .padding(horizontal = 96.dp),
+                    .sizeIn(maxWidth = 300.dp, maxHeight = 600.dp)
+                    .fillMaxSize()
+                    .background(ValorantTheme.colors.secondary)
+                    .padding(40.dp),
                 painter = painterResource(Res.drawable.ic_valorant),
                 contentDescription = stringResource(Res.string.desc_valorant_logo)
             )
         }
 
         LaunchedEffect(Unit) {
-            delay(100)
+            delay(2000)
             navigator.replace(MainNavigator())
         }
     }
