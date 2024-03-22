@@ -57,7 +57,25 @@
   </tr>
 </table>
 
-## Preview
+## Previews
+
+### Mobile
+
+https://github.com/cnrture/Valorant-App-Compose-Multiplatform/assets/29903779/5e8d3c9d-af6b-4c64-96c7-c0a316951108
+
+https://github.com/cnrture/Valorant-App-Compose-Multiplatform/assets/29903779/e3ecf6ae-03af-4051-b394-3cebe1f10b7e
+
+### Tablet
+
+https://github.com/cnrture/Valorant-App-Compose-Multiplatform/assets/29903779/6e4893cf-7821-4fea-8b95-a392e2b37859
+
+https://github.com/cnrture/Valorant-App-Compose-Multiplatform/assets/29903779/0e5394a7-e85a-48cc-aa00-891d4decdbd9
+
+## Desktop
+
+https://github.com/cnrture/Valorant-App-Compose-Multiplatform/assets/29903779/2606c5d6-fac4-4382-b285-a73e5b741534
+
+
 
 
 
