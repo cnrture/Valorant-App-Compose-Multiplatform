@@ -1,0 +1,19 @@
+<resources>
+    <string name="desc_valorant_logo">Valorant Logo</string>
+    <string name="desc_skill_image">Skill Image</string>
+    <string name="desc_back_icon">Back Icon</string>
+    <string name="desc_warning_image">Warning Image</string>
+
+    <string name="title_description">Description</string>
+    <string name="title_abilities">Abilities</string>
+    <string name="title_damage_range">Damage Range</string>
+    <string name="title_skins">Skins</string>
+
+    <string name="text_head">Head</string>
+    <string name="text_body">Body</string>
+    <string name="text_leg">Leg</string>
+
+    <string name="logo_valorant">Valorant Logo</string>
+
+    <string name="something_went_wrong">Something went wrong</string>
+</resources>

@@ -1,0 +1,17 @@
+naming:
+  FunctionNaming:
+    active: false
+  MatchingDeclarationName:
+    active: false
+
+complexity:
+  LongParameterList:
+    active: false
+
+style:
+  DestructuringDeclarationWithTooManyEntries:
+    active: false
+
+exceptions:
+  TooGenericExceptionCaught:
+    active: false

@@ -1,0 +1,15 @@
+{
+    "configurations": [
+        
+        {
+            "name": "composeApp [Desktop]",
+            "type": "gradle",
+            "workingDir": "$PROJECT_DIR$",
+            "tasks": ["desktopRun"],
+            "args": ["-DmainClass=MainKt", "--quiet", "-p", "$PROJECT_DIR$/composeApp"],
+            "initScripts": {
+                "flmapper": "ext.mapPath = { path -> null }"
+            }
+        }
+    ]
+}
