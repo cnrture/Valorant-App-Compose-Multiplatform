@@ -103,8 +103,18 @@ data class AgentDetailScreen(val id: String) : Screen {
                 val agentColor = agent.backgroundGradientColors[1]
 
                 Column(
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .weight(1f)
+                        .verticalScroll(rememberScrollState())
                 ) {
+                    ValorantBackIcon(
+                        padding = 12.dp,
+                        onBackClick = onBackClick
+                    )
+
+                    Spacer(modifier = Modifier.height(24.dp))
+
                     ValorantText(
                         modifier = Modifier.padding(horizontal = 24.dp),
                         text = agent.displayName,
@@ -152,11 +162,6 @@ data class AgentDetailScreen(val id: String) : Screen {
                     )
                 }
             }
-
-            ValorantBackIcon(
-                padding = 12.dp,
-                onBackClick = onBackClick
-            )
         }
     }
 
@@ -195,6 +200,7 @@ data class AgentDetailScreen(val id: String) : Screen {
                 )
 
                 ValorantBackIcon(
+                    modifier = Modifier.align(Alignment.TopStart),
                     padding = 12.dp,
                     onBackClick = onBackClick
                 )

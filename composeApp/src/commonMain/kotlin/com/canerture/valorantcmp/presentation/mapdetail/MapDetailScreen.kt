@@ -107,6 +107,7 @@ data class MapDetailScreen(val id: String) : Screen {
             }
 
             ValorantBackIcon(
+                modifier = Modifier.align(Alignment.TopStart),
                 padding = 24.dp,
                 onBackClick = onBackClick
             )

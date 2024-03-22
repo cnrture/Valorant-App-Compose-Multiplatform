@@ -126,7 +126,10 @@ data class WeaponDetailScreen(val id: String) : Screen {
                     )
                 }
 
-                ValorantBackIcon(onBackClick = onBackClick)
+                ValorantBackIcon(
+                    modifier = Modifier.align(Alignment.TopStart),
+                    onBackClick = onBackClick
+                )
             }
 
             Spacer(modifier = Modifier.size(24.dp))
