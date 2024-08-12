@@ -17,11 +17,6 @@
   </tr>
   </tr>
     <tr>
-    <td align="center">Voyager</td>
-    <td align="center">https://github.com/adrielcafe/voyager</td>
-  </tr>
-  </tr>
-    <tr>
     <td align="center">BuildKonfig</td>
     <td align="center">https://github.com/yshrsmz/BuildKonfig</td>
   </tr>
