@@ -19,10 +19,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.canerture.valorantcmp.presentation.theme.ValorantTheme
 
+private const val DIV = 150
+
 @Composable
 fun LinearProgress(header: String, progress: Double, progressString: String) {
     val animatedProgress = animateFloatAsState(
-        targetValue = progress.div(150).toFloat(),
+        targetValue = progress.div(DIV).toFloat(),
         animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
     ).value
 

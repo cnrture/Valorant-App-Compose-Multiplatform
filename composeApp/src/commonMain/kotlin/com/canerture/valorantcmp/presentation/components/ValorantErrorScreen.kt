@@ -25,6 +25,8 @@ import valorantcmp.composeapp.generated.resources.Res
 import valorantcmp.composeapp.generated.resources.desc_warning_image
 import valorantcmp.composeapp.generated.resources.something_went_wrong
 
+private const val ASPECT_RATIO = 3 / 2f
+
 @Composable
 fun ValorantErrorScreen(
     errorText: String?,
@@ -44,7 +46,7 @@ fun ValorantErrorScreen(
         Image(
             imageVector = Icons.Rounded.Warning,
             contentDescription = stringResource(Res.string.desc_warning_image),
-            modifier = Modifier.aspectRatio(3 / 2f).padding(horizontal = 24.dp),
+            modifier = Modifier.aspectRatio(ASPECT_RATIO).padding(horizontal = 24.dp),
             colorFilter = ColorFilter.tint(ValorantTheme.colors.primary)
         )
 

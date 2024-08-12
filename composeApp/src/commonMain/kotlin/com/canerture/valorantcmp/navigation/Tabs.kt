@@ -2,6 +2,7 @@ package com.canerture.valorantcmp.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.painter.Painter
+import com.canerture.valorantcmp.common.Routes
 import org.jetbrains.compose.resources.painterResource
 import valorantcmp.composeapp.generated.resources.Res
 import valorantcmp.composeapp.generated.resources.ic_agents
@@ -17,8 +18,8 @@ data class NavItem(
 
 @Composable
 fun TabList() = listOf(
-    NavItem("agents", "Agents", painterResource(Res.drawable.ic_agents)),
-    NavItem("maps", "Maps", painterResource(Res.drawable.ic_maps)),
-    NavItem("weapons", "Weapons", painterResource(Res.drawable.ic_weapons)),
-    NavItem("tiers", "Tiers", painterResource(Res.drawable.ic_tiers)),
+    NavItem(Routes.AGENTS, "Agents", painterResource(Res.drawable.ic_agents)),
+    NavItem(Routes.MAPS, "Maps", painterResource(Res.drawable.ic_maps)),
+    NavItem(Routes.WEAPONS, "Weapons", painterResource(Res.drawable.ic_weapons)),
+    NavItem(Routes.TIERS, "Tiers", painterResource(Res.drawable.ic_tiers)),
 )

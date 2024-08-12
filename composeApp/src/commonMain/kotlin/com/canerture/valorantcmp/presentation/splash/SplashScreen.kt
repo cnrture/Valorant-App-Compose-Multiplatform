@@ -19,6 +19,8 @@ import valorantcmp.composeapp.generated.resources.Res
 import valorantcmp.composeapp.generated.resources.desc_valorant_logo
 import valorantcmp.composeapp.generated.resources.ic_valorant
 
+private const val DELAY = 2000L
+
 @Composable
 fun SplashScreen(
     onNavigateAgentsScreen: () -> Unit
@@ -41,7 +43,7 @@ fun SplashScreen(
     }
 
     LaunchedEffect(Unit) {
-        delay(2000)
+        delay(DELAY)
         onNavigateAgentsScreen()
     }
 }

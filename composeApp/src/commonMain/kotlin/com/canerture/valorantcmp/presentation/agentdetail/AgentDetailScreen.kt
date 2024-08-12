@@ -41,6 +41,10 @@ import valorantcmp.composeapp.generated.resources.Res
 import valorantcmp.composeapp.generated.resources.title_abilities
 import valorantcmp.composeapp.generated.resources.title_description
 
+private const val ASPECT_RATIO = 16 / 9f
+private const val ASPECT_RATIO_MOBILE = 3 / 2f
+private const val ASPECT_RATIO_MOBILE_FULL = 1f
+
 @Composable
 fun AgentDetailScreen(
     uiState: AgentDetailContract.UiState,
@@ -137,13 +141,13 @@ fun DetailDesktopContent(
                 contentAlignment = Alignment.Center
             ) {
                 ValorantImage(
-                    modifier = Modifier.widthIn(max = 400.dp).aspectRatio(9 / 16f),
+                    modifier = Modifier.widthIn(max = 400.dp).aspectRatio(ASPECT_RATIO),
                     imageUrl = agent.background,
                     contentDescription = agent.displayName,
                 )
 
                 ValorantImage(
-                    modifier = Modifier.widthIn(max = 400.dp).aspectRatio(9 / 16f),
+                    modifier = Modifier.widthIn(max = 400.dp).aspectRatio(ASPECT_RATIO),
                     imageUrl = agent.fullPortrait,
                     contentDescription = agent.displayName,
                 )
@@ -175,13 +179,13 @@ fun DetailMobileContent(
             contentAlignment = Alignment.Center
         ) {
             ValorantImage(
-                modifier = Modifier.widthIn(max = 400.dp).aspectRatio(3 / 2f),
+                modifier = Modifier.widthIn(max = 400.dp).aspectRatio(ASPECT_RATIO_MOBILE),
                 imageUrl = agent.background,
                 contentDescription = agent.displayName,
             )
 
             ValorantImage(
-                modifier = Modifier.widthIn(max = 400.dp).aspectRatio(1f),
+                modifier = Modifier.widthIn(max = 400.dp).aspectRatio(ASPECT_RATIO_MOBILE_FULL),
                 imageUrl = agent.fullPortrait,
                 contentDescription = agent.displayName,
             )

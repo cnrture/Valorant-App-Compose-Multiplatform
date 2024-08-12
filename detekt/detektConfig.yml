@@ -7,9 +7,25 @@ naming:
 complexity:
   LongParameterList:
     active: false
+  TooManyFunctions:
+    active: false
+  LongMethod:
+    active: true
+    ignoreAnnotated: [ 'Composable' ]
+  CyclomaticComplexMethod:
+    active: true
+  excludes: [ "**/common/**" ]
 
 style:
   DestructuringDeclarationWithTooManyEntries:
+    active: false
+  MagicNumber:
+    active: true
+    excludes: [ "**/build/**", "**/theme/**" ]
+  MayBeConst:
+    active: true
+    excludes: [ "**/build/**" ]
+  NewLineAtEndOfFile:
     active: false
 
 exceptions:

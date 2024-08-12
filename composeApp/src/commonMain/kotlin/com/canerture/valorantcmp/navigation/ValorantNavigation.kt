@@ -9,7 +9,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
+import com.canerture.valorantcmp.common.Params
+import com.canerture.valorantcmp.common.Routes
 import com.canerture.valorantcmp.presentation.agentdetail.AgentDetailScreen
 import com.canerture.valorantcmp.presentation.agentdetail.AgentDetailViewModel
 import com.canerture.valorantcmp.presentation.agents.AgentsScreen
@@ -27,26 +28,29 @@ import com.canerture.valorantcmp.presentation.weapons.WeaponsScreen
 import com.canerture.valorantcmp.presentation.weapons.WeaponsViewModel
 import org.koin.compose.koinInject
 
+private const val DURATION = 1000
+
 @Composable
 fun ValorantNavigation(
-    navHostController: NavHostController = rememberNavController(),
+    navHostController: NavHostController,
 ) {
-    val enterAnim = fadeIn(tween(1000))
-    val exitAnim = fadeOut(tween(1000))
+    val enterAnim = fadeIn(tween(DURATION))
+    val exitAnim = fadeOut(tween(DURATION))
+
     NavHost(
         navController = navHostController,
-        startDestination = "splash",
+        startDestination = Routes.SPLASH,
         enterTransition = { enterAnim },
         exitTransition = { exitAnim },
         popEnterTransition = { enterAnim },
         popExitTransition = { exitAnim }
     ) {
-        composable("splash") {
+        composable(Routes.SPLASH) {
             SplashScreen(
-                onNavigateAgentsScreen = { navHostController.navigate("agents") }
+                onNavigateAgentsScreen = { navHostController.navigate(Routes.AGENTS) }
             )
         }
-        composable("agents") {
+        composable(Routes.AGENTS) {
             val viewModel: AgentsViewModel = koinInject()
             val uiState by viewModel.uiState.collectAsStateWithLifecycle()
             val uiEffect = viewModel.uiEffect
@@ -56,12 +60,12 @@ fun ValorantNavigation(
                 uiEffect = uiEffect,
                 onAction = viewModel::onAction,
                 onNavigateAgentDetail = { agentId ->
-                    navHostController.navigate("agentDetail/$agentId")
+                    navHostController.navigate(Routes.AGENT_DETAIL.plus("/$agentId"))
                 }
             )
         }
-        composable("agentDetail/{agentId}") { backStackEntry ->
-            val agentId = backStackEntry.arguments?.getString("agentId")
+        composable(Routes.AGENT_DETAIL_WITH_PARAM) { backStackEntry ->
+            val agentId = backStackEntry.arguments?.getString(Params.AGENT_ID)
             val viewModel: AgentDetailViewModel = koinInject()
             val uiState by viewModel.uiState.collectAsStateWithLifecycle()
             val uiEffect = viewModel.uiEffect
@@ -73,7 +77,7 @@ fun ValorantNavigation(
                 onBackClick = { navHostController.popBackStack() },
             )
         }
-        composable("maps") {
+        composable(Routes.MAPS) {
             val viewModel: MapsViewModel = koinInject()
             val uiState by viewModel.uiState.collectAsStateWithLifecycle()
             val uiEffect = viewModel.uiEffect
@@ -83,12 +87,12 @@ fun ValorantNavigation(
                 uiEffect = uiEffect,
                 onAction = viewModel::onAction,
                 onNavigateMapDetail = { mapId ->
-                    navHostController.navigate("mapDetail/$mapId")
+                    navHostController.navigate(Routes.MAP_DETAIL.plus("/$mapId"))
                 }
             )
         }
-        composable("mapDetail/{mapId}") { backStackEntry ->
-            val mapId = backStackEntry.arguments?.getString("mapId")
+        composable(Routes.MAP_DETAIL_WITH_PARAM) { backStackEntry ->
+            val mapId = backStackEntry.arguments?.getString(Params.MAP_ID)
             val viewModel: MapDetailViewModel = koinInject()
             val uiState by viewModel.uiState.collectAsStateWithLifecycle()
             val uiEffect = viewModel.uiEffect
@@ -100,7 +104,7 @@ fun ValorantNavigation(
                 onBackClick = { navHostController.popBackStack() },
             )
         }
-        composable("weapons") {
+        composable(Routes.WEAPONS) {
             val viewModel: WeaponsViewModel = koinInject()
             val uiState by viewModel.uiState.collectAsStateWithLifecycle()
             val uiEffect = viewModel.uiEffect
@@ -110,12 +114,12 @@ fun ValorantNavigation(
                 uiEffect = uiEffect,
                 onAction = viewModel::onAction,
                 onNavigateWeaponDetail = { weaponId ->
-                    navHostController.navigate("weaponDetail/$weaponId")
+                    navHostController.navigate(Routes.WEAPON_DETAIL.plus("/$weaponId"))
                 }
             )
         }
-        composable("weaponDetail/{weaponId}") { backStackEntry ->
-            val weaponId = backStackEntry.arguments?.getString("weaponId")
+        composable(Routes.WEAPON_DETAIL_WITH_PARAM) { backStackEntry ->
+            val weaponId = backStackEntry.arguments?.getString(Params.WEAPON_ID)
             val viewModel: WeaponDetailViewModel = koinInject()
             val uiState by viewModel.uiState.collectAsStateWithLifecycle()
             val uiEffect = viewModel.uiEffect
@@ -127,7 +131,7 @@ fun ValorantNavigation(
                 onBackClick = { navHostController.popBackStack() },
             )
         }
-        composable("tiers") {
+        composable(Routes.TIERS) {
             val viewModel: TiersViewModel = koinInject()
             val uiState by viewModel.uiState.collectAsStateWithLifecycle()
             val uiEffect = viewModel.uiEffect

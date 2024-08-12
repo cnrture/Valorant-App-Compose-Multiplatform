@@ -19,6 +19,9 @@ import com.canerture.valorantcmp.presentation.components.ValorantImage
 import com.canerture.valorantcmp.presentation.components.ValorantText
 import com.canerture.valorantcmp.presentation.theme.ValorantTheme
 
+private const val ASPECT_RATIO = 3 / 5f
+private const val ALPHA = 0.2f
+
 @Composable
 fun AgentItem(
     modifier: Modifier = Modifier,
@@ -52,8 +55,8 @@ fun AgentItem(
                 ValorantImage(
                     modifier = Modifier
                         .fillMaxSize()
-                        .aspectRatio(3 / 5f)
-                        .alpha(0.2f),
+                        .aspectRatio(ASPECT_RATIO)
+                        .alpha(ALPHA),
                     imageUrl = agent.background,
                     contentDescription = agent.displayName,
                 )
@@ -61,7 +64,7 @@ fun AgentItem(
 
             ValorantImage(
                 modifier = Modifier
-                    .aspectRatio(3 / 5f)
+                    .aspectRatio(ASPECT_RATIO)
                     .align(Alignment.CenterEnd),
                 imageUrl = agent.fullPortrait,
                 contentDescription = agent.displayName,

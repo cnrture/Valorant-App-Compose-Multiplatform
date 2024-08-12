@@ -10,6 +10,8 @@ import coil3.compose.LocalPlatformContext
 import coil3.request.ImageRequest
 import coil3.request.crossfade
 
+private const val DURATION = 500
+
 @Composable
 fun ValorantImage(
     modifier: Modifier = Modifier,
@@ -23,7 +25,7 @@ fun ValorantImage(
         modifier = modifier,
         model = ImageRequest.Builder(context)
             .data(imageUrl)
-            .crossfade(500)
+            .crossfade(DURATION)
             .build(),
         contentDescription = contentDescription,
         contentScale = contentScale,

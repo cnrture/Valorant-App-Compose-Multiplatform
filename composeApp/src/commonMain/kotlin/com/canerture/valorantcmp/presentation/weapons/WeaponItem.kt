@@ -16,6 +16,8 @@ import com.canerture.valorantcmp.presentation.components.ValorantImage
 import com.canerture.valorantcmp.presentation.components.ValorantText
 import com.canerture.valorantcmp.presentation.theme.ValorantTheme
 
+private const val ASPECT_RATIO = 16 / 9f
+
 @Composable
 fun WeaponItem(
     weapon: WeaponUI,
@@ -29,7 +31,7 @@ fun WeaponItem(
     ) {
         Box(contentAlignment = Alignment.Center) {
             ValorantImage(
-                modifier = Modifier.aspectRatio(16 / 9f).padding(32.dp),
+                modifier = Modifier.aspectRatio(ASPECT_RATIO).padding(32.dp),
                 imageUrl = weapon.displayIcon,
                 contentScale = ContentScale.Fit,
                 contentDescription = weapon.displayName

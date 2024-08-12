@@ -19,6 +19,8 @@ import com.canerture.valorantcmp.presentation.components.ValorantImage
 import com.canerture.valorantcmp.presentation.components.ValorantText
 import com.canerture.valorantcmp.presentation.theme.ValorantTheme
 
+private const val ASPECT_RATIO = 9 / 16f
+
 @Composable
 fun MapItem(
     map: MapUI,
@@ -32,7 +34,7 @@ fun MapItem(
     ) {
         Box {
             ValorantImage(
-                modifier = Modifier.aspectRatio(9 / 16f),
+                modifier = Modifier.aspectRatio(ASPECT_RATIO),
                 imageUrl = map.splash,
                 contentScale = ContentScale.Crop,
                 contentDescription = map.displayName

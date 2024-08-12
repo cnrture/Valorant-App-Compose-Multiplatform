@@ -19,6 +19,8 @@ import org.jetbrains.compose.resources.stringResource
 import valorantcmp.composeapp.generated.resources.Res
 import valorantcmp.composeapp.generated.resources.desc_warning_image
 
+private const val ASPECT_RATIO = 3 / 2f
+
 @Composable
 fun ValorantEmptyScreen(
     modifier: Modifier = Modifier
@@ -34,7 +36,7 @@ fun ValorantEmptyScreen(
             imageVector = Icons.Rounded.WarningAmber,
             contentDescription = stringResource(Res.string.desc_warning_image),
             modifier = Modifier
-                .aspectRatio(3 / 2f)
+                .aspectRatio(ASPECT_RATIO)
                 .padding(horizontal = 96.dp),
             colorFilter = ColorFilter.tint(ValorantTheme.colors.defaultRed)
         )

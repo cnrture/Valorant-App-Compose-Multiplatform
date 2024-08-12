@@ -15,6 +15,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.canerture.valorantcmp.presentation.theme.ValorantTheme
 
+private const val DURATION = 900
+
 @Composable
 fun ValorantProgressBar() {
     val progressValue = 1f
@@ -25,7 +27,7 @@ fun ValorantProgressBar() {
     val progressAnimationValue by infiniteTransition.animateFloat(
         initialValue = 0.0f,
         targetValue = progressValue,
-        animationSpec = infiniteRepeatable(animation = tween(900)),
+        animationSpec = infiniteRepeatable(animation = tween(DURATION)),
         label = "stringResource(R.string.progress_bar_animation)"
     )
 
