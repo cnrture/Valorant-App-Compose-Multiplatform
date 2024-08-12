@@ -3,37 +3,37 @@ package com.canerture.valorantcmp.navigation
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemColors
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
-import com.canerture.valorantcmp.common.NoRippleInteractionSource
-import com.canerture.valorantcmp.presentation.theme.ValorantTheme
+import androidx.compose.runtime.getValue
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.compose.currentBackStackEntryAsState
 
 @Composable
-fun ValorantNavigationBar() {
-    val tabNavigator = LocalTabNavigator.current
+fun ValorantNavigationBar(
+    navController: NavController,
+) {
+    NavigationBar {
+        val navBackStackEntry by navController.currentBackStackEntryAsState()
+        val currentDestination = navBackStackEntry?.destination
 
-    NavigationBar(
-        containerColor = ValorantTheme.colors.navColors.containerColor,
-    ) {
-        TabList().forEach { item ->
+        TabList().forEach { screen ->
             NavigationBarItem(
-                selected = tabNavigator.current == item.screen,
-                onClick = { tabNavigator.current = item.screen },
-                interactionSource = NoRippleInteractionSource(),
-                label = { Text(text = item.title) },
-                icon = { Icon(item.icon, item.title) },
-                colors = NavigationBarItemColors(
-                    selectedIconColor = ValorantTheme.colors.navColors.selectedIconColor,
-                    selectedTextColor = ValorantTheme.colors.navColors.selectedTextColor,
-                    selectedIndicatorColor = ValorantTheme.colors.navColors.selectedIndicatorColor,
-                    unselectedIconColor = ValorantTheme.colors.navColors.unselectedIconColor,
-                    unselectedTextColor = ValorantTheme.colors.navColors.unselectedTextColor,
-                    disabledIconColor = ValorantTheme.colors.navColors.disabledIconColor,
-                    disabledTextColor = ValorantTheme.colors.navColors.disabledTextColor
-                ),
-                alwaysShowLabel = false
+                selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
+                icon = { Icon(painter = screen.icon, contentDescription = null) },
+                label = { Text(screen.title) },
+                onClick = {
+                    navController.navigate(screen.route) {
+                        navController.graph.startDestinationRoute?.let { route ->
+                            popUpTo(route) {
+                                saveState = true
+                            }
+                        }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                }
             )
         }
     }

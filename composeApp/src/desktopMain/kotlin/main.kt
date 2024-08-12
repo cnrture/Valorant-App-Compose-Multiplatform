@@ -14,7 +14,7 @@ fun main() = application {
         placement = WindowPlacement.Floating,
         position = WindowPosition(Alignment.Center)
     )
-    Window(title = "Valorant App", onCloseRequest = ::exitApplication, state = state) {
+    Window(title = "Valorant CMP", onCloseRequest = ::exitApplication, state = state) {
         window.minimumSize = Dimension(1280, 760)
         App()
     }

@@ -1,4 +1,4 @@
-package com.canerture.valorantcmp.presentation.competitivetiers
+package com.canerture.valorantcmp.presentation.tiers
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

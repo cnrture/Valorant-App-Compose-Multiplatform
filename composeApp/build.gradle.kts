@@ -10,6 +10,7 @@ plugins {
     alias(libs.plugins.buildKonfigPlugin)
     alias(libs.plugins.detekt)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.composeCompiler)
 }
 
 kotlin {
@@ -51,6 +52,8 @@ kotlin {
             implementation(libs.androidx.activity.compose)
             implementation(libs.ktor.client.okhttp)
             implementation(libs.kotlinx.coroutines.android)
+            implementation(libs.koin.android)
+            implementation(libs.koin.annotations)
         }
 
         commonMain.dependencies {
@@ -62,18 +65,15 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
 
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
+            implementation(libs.koin.annotations)
+
             implementation(libs.window.size)
 
             implementation(libs.co.touchlab.stately.common)
 
-            implementation(libs.voyager.navigator)
-            implementation(libs.voyager.tabNavigator)
-            implementation(libs.voyager.koin)
-            implementation(libs.voyager.transitions)
-
             implementation(libs.colorMath)
-
-            implementation(libs.koin.core)
 
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.content.negotiation)
@@ -84,6 +84,8 @@ kotlin {
             implementation(libs.coilCompose)
 
             implementation(libs.kotlinx.coroutines.core)
+
+            implementation(libs.compose.navigation)
         }
 
         iosMain.dependencies {

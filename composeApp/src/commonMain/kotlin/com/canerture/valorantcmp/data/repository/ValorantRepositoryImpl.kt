@@ -30,8 +30,8 @@ class ValorantRepositoryImpl(private val valorantService: ValorantService) : Val
         valorantService.getWeaponDetail(id)
     }
 
-    override suspend fun getCompetitiveTiers() = safeApiCall {
-        valorantService.getCompetitiveTiers()
+    override suspend fun getTiers() = safeApiCall {
+        valorantService.getTiers()
     }
 
     private suspend fun <T : Any> safeApiCall(call: suspend () -> BaseResponse<T>): Result<T?> {

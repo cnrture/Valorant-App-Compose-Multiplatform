@@ -1,11 +1,16 @@
 package com.canerture.valorantcmp.common
 
 import androidx.compose.foundation.pager.PagerState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.colorspace.ColorSpaces
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.util.lerp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.repeatOnLifecycle
 import com.github.ajalt.colormath.model.LABColorSpaces.LAB50
 import com.github.ajalt.colormath.model.RGBColorSpaces.ACES
 import com.github.ajalt.colormath.model.RGBColorSpaces.ACEScg
@@ -20,6 +25,7 @@ import com.github.ajalt.colormath.model.RGBInt
 import com.github.ajalt.colormath.model.SRGB
 import com.github.ajalt.colormath.model.XYZColorSpaces.XYZ50
 import com.github.ajalt.colormath.parse
+import kotlinx.coroutines.flow.Flow
 import kotlin.math.absoluteValue
 
 fun colorParse(color: String): Color {
@@ -63,3 +69,17 @@ fun Modifier.carouselTransition(page: Int, pagerState: PagerState) =
         alpha = transformation
         scaleY = transformation
     }
+
+@Composable
+fun <T> Flow<T>.collectWithLifecycle(
+    collect: suspend (T) -> Unit
+) {
+    val lifecycleOwner = LocalLifecycleOwner.current
+    LaunchedEffect(this, lifecycleOwner) {
+        lifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+            this@collectWithLifecycle.collect { effect ->
+                collect(effect)
+            }
+        }
+    }
+}

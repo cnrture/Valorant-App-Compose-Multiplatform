@@ -7,27 +7,39 @@ import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.NavigationRailItemColors
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.canerture.valorantcmp.common.NoRippleInteractionSource
 import com.canerture.valorantcmp.presentation.theme.ValorantTheme
 
 @Composable
-fun ValorantNavigationRail() {
-    val tabNavigator = LocalTabNavigator.current
+fun ValorantNavigationRail(
+    navController: NavController,
+) {
+    NavigationRail {
+        val navBackStackEntry by navController.currentBackStackEntryAsState()
+        val currentDestination = navBackStackEntry?.destination
 
-    NavigationRail(
-        containerColor = ValorantTheme.colors.navColors.containerColor,
-    ) {
-        TabList().forEach { item ->
+        TabList().forEach { screen ->
             NavigationRailItem(
                 modifier = Modifier.padding(vertical = 16.dp),
-                selected = tabNavigator.current == item.screen,
-                onClick = { tabNavigator.current = item.screen },
+                selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
+                onClick = {
+                    navController.navigate(screen.route) {
+                        popUpTo(navController.graph.startDestinationRoute!!) {
+                            saveState = true
+                        }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                },
                 interactionSource = NoRippleInteractionSource(),
-                label = { Text(item.title) },
-                icon = { Icon(item.icon, item.title) },
+                icon = { Icon(painter = screen.icon, contentDescription = null) },
+                label = { Text(screen.title) },
                 colors = NavigationRailItemColors(
                     selectedIconColor = ValorantTheme.colors.navColors.selectedIconColor,
                     selectedTextColor = ValorantTheme.colors.navColors.selectedTextColor,
