@@ -4,6 +4,7 @@ import com.canerture.valorantcmp.domain.model.AgentUI
 
 object AgentDetailContract {
     data class UiState(
+        val isLoading: Boolean = false,
         val agent: AgentUI? = null,
     )
 

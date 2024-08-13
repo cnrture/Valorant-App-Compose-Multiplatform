@@ -30,6 +30,7 @@ import com.canerture.valorantcmp.domain.model.AbilityUI
 import com.canerture.valorantcmp.domain.model.AgentUI
 import com.canerture.valorantcmp.presentation.components.ValorantBackIcon
 import com.canerture.valorantcmp.presentation.components.ValorantImage
+import com.canerture.valorantcmp.presentation.components.ValorantProgressBar
 import com.canerture.valorantcmp.presentation.components.ValorantTabRow
 import com.canerture.valorantcmp.presentation.components.ValorantText
 import com.canerture.valorantcmp.presentation.theme.LocalWindowType
@@ -80,6 +81,8 @@ fun AgentDetailScreen(
             )
         }
     }
+
+    if (uiState.isLoading) ValorantProgressBar()
 }
 
 @Composable
@@ -87,71 +90,70 @@ fun DetailDesktopContent(
     agent: AgentUI,
     onBackClick: () -> Unit
 ) {
-    Box(
-        modifier = Modifier.fillMaxSize()
+    Row(
+        modifier = Modifier.fillMaxSize(),
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            val agentColor = agent.backgroundGradientColors[1]
+        val agentColor = agent.backgroundGradientColors[1]
 
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .weight(1f)
-                    .verticalScroll(rememberScrollState())
-            ) {
-                ValorantBackIcon(
-                    padding = 12.dp,
-                    onBackClick = onBackClick
-                )
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .weight(1f)
+                .verticalScroll(rememberScrollState())
+        ) {
+            ValorantBackIcon(
+                padding = 12.dp,
+                onBackClick = onBackClick
+            )
 
-                Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(24.dp))
 
-                ValorantText(
-                    modifier = Modifier.padding(horizontal = 24.dp),
-                    text = agent.displayName,
-                    style = ValorantTheme.typography.titleLarge.copy(color = agentColor)
-                )
+            ValorantText(
+                modifier = Modifier.padding(horizontal = 24.dp),
+                text = agent.displayName,
+                style = ValorantTheme.typography.titleLarge.copy(color = agentColor)
+            )
 
-                Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
-                ValorantText(
-                    modifier = Modifier.padding(horizontal = 24.dp),
-                    text = agent.description,
-                    style = ValorantTheme.typography.bodySmall.copy(textAlign = TextAlign.Start),
-                )
+            ValorantText(
+                modifier = Modifier.padding(horizontal = 24.dp),
+                text = agent.description,
+                style = ValorantTheme.typography.bodySmall.copy(textAlign = TextAlign.Start),
+            )
 
-                Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
-                AbilitiesTabLayout(
-                    abilities = agent.abilities,
-                    agentColor = agentColor
-                )
-            }
+            AbilitiesTabLayout(
+                abilities = agent.abilities,
+                agentColor = agentColor
+            )
+        }
 
-            Box(
-                modifier = Modifier
-                    .background(
-                        brush = Brush.verticalGradient(agent.backgroundGradientColors),
-                        shape = RoundedCornerShape(
-                            topStart = 120.dp
-                        )
+        Box(
+            modifier = Modifier
+                .background(
+                    brush = Brush.verticalGradient(agent.backgroundGradientColors),
+                    shape = RoundedCornerShape(
+                        topStart = 120.dp
                     )
-                    .padding(16.dp)
-                    .fillMaxHeight(),
-                contentAlignment = Alignment.Center
-            ) {
-                ValorantImage(
-                    modifier = Modifier.widthIn(max = 400.dp).aspectRatio(ASPECT_RATIO),
-                    imageUrl = agent.background,
-                    contentDescription = agent.displayName,
                 )
+                .padding(16.dp)
+                .fillMaxHeight(),
+            contentAlignment = Alignment.Center
+        ) {
+            ValorantImage(
+                modifier = Modifier.widthIn(max = 400.dp).aspectRatio(ASPECT_RATIO),
+                imageUrl = agent.background,
+                contentDescription = agent.displayName,
+            )
 
-                ValorantImage(
-                    modifier = Modifier.widthIn(max = 400.dp).aspectRatio(ASPECT_RATIO),
-                    imageUrl = agent.fullPortrait,
-                    contentDescription = agent.displayName,
-                )
-            }
+            ValorantImage(
+                modifier = Modifier.widthIn(max = 400.dp).aspectRatio(ASPECT_RATIO),
+                imageUrl = agent.fullPortrait,
+                contentDescription = agent.displayName,
+            )
         }
     }
 }

@@ -4,6 +4,7 @@ import com.canerture.valorantcmp.domain.model.TierUI
 
 object TiersContract {
     data class UiState(
+        val isLoading: Boolean = false,
         val tiers: List<TierUI> = emptyList(),
     )
 

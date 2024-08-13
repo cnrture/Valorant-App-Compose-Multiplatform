@@ -4,6 +4,7 @@ import com.canerture.valorantcmp.domain.model.WeaponUI
 
 object WeaponDetailContract {
     data class UiState(
+        val isLoading: Boolean = false,
         val weapon: WeaponUI? = null,
     )
 

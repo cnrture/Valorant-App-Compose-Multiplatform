@@ -18,6 +18,7 @@ import com.canerture.valorantcmp.common.collectWithLifecycle
 import com.canerture.valorantcmp.domain.model.MapUI
 import com.canerture.valorantcmp.presentation.components.ValorantBackIcon
 import com.canerture.valorantcmp.presentation.components.ValorantImage
+import com.canerture.valorantcmp.presentation.components.ValorantProgressBar
 import com.canerture.valorantcmp.presentation.components.ValorantText
 import com.canerture.valorantcmp.presentation.theme.ValorantTheme
 import kotlinx.coroutines.flow.Flow
@@ -48,6 +49,8 @@ fun MapDetailScreen(
             }
         )
     }
+
+    if (uiState.isLoading) ValorantProgressBar()
 }
 
 @Composable

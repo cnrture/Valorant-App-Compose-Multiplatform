@@ -4,6 +4,7 @@ import com.canerture.valorantcmp.domain.model.MapUI
 
 object MapDetailContract {
     data class UiState(
+        val isLoading: Boolean = false,
         val map: MapUI? = null,
     )
 

@@ -1,4 +1,5 @@
 import com.codingfeline.buildkonfig.compiler.FieldSpec
+import org.gradle.kotlin.dsl.support.kotlinCompilerOptions
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import java.util.Properties
 
@@ -18,6 +19,7 @@ kotlin {
         compilations.all {
             kotlinOptions {
                 jvmTarget = "17"
+                kotlinOptions.freeCompilerArgs += "-Xcontext-receivers"
             }
         }
     }
@@ -33,6 +35,10 @@ kotlin {
             baseName = "ComposeApp"
             isStatic = true
         }
+    }
+
+    sourceSets.configureEach {
+        languageSettings.enableLanguageFeature("ExplicitBackingFields")
     }
 
     sourceSets {

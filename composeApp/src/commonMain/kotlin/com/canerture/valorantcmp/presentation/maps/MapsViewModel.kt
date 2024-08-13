@@ -2,47 +2,30 @@ package com.canerture.valorantcmp.presentation.maps
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.canerture.valorantcmp.delegation.MVI
+import com.canerture.valorantcmp.delegation.mvi
 import com.canerture.valorantcmp.domain.usecase.maps.GetMapsUseCase
 import com.canerture.valorantcmp.presentation.maps.MapsContract.UiEffect
 import com.canerture.valorantcmp.presentation.maps.MapsContract.UiState
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class MapsViewModel(
     private val getMapsUseCase: GetMapsUseCase
-) : ViewModel() {
+) : ViewModel(), MVI<UiState, MapsContract.UiAction, UiEffect> by mvi(UiState()) {
 
-    private val _uiState = MutableStateFlow(UiState())
-    val uiState: StateFlow<UiState> = _uiState.asStateFlow()
-
-    private val _uiEffect by lazy { Channel<UiEffect>() }
-    val uiEffect: Flow<UiEffect> by lazy { _uiEffect.receiveAsFlow() }
-
-    fun onAction(uiAction: MapsContract.UiAction) = viewModelScope.launch {
+    override fun onAction(uiAction: MapsContract.UiAction) {
         when (uiAction) {
-            is MapsContract.UiAction.OnMapClick -> emitUiEffect(UiEffect.GoToMapDetail(uiAction.id))
+            is MapsContract.UiAction.OnMapClick -> getMaps()
         }
     }
 
     fun getMaps() = viewModelScope.launch {
+        updateUiState { copy(isLoading = true) }
         getMapsUseCase().onSuccess {
-            updateUiState { copy(maps = it) }
+            updateUiState { copy(isLoading = false, maps = it) }
         }.onFailure {
+            updateUiState { copy(isLoading = false) }
             emitUiEffect(UiEffect.ShowError(it.message.orEmpty()))
         }
-    }
-
-    private fun updateUiState(block: UiState.() -> UiState) {
-        _uiState.update(block)
-    }
-
-    private suspend fun emitUiEffect(uiEffect: UiEffect) {
-        _uiEffect.send(uiEffect)
     }
 }

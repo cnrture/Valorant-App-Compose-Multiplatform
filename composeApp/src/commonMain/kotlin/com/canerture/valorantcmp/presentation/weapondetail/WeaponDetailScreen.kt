@@ -26,6 +26,7 @@ import com.canerture.valorantcmp.domain.model.WeaponUI
 import com.canerture.valorantcmp.presentation.components.LinearProgress
 import com.canerture.valorantcmp.presentation.components.ValorantBackIcon
 import com.canerture.valorantcmp.presentation.components.ValorantImage
+import com.canerture.valorantcmp.presentation.components.ValorantProgressBar
 import com.canerture.valorantcmp.presentation.components.ValorantTabRow
 import com.canerture.valorantcmp.presentation.components.ValorantText
 import com.canerture.valorantcmp.presentation.theme.ValorantTheme
@@ -63,6 +64,8 @@ fun WeaponDetailScreen(
             }
         )
     }
+
+    if (uiState.isLoading) ValorantProgressBar()
 }
 
 @Composable

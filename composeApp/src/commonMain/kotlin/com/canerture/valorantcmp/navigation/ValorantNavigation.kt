@@ -4,6 +4,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
@@ -54,7 +55,9 @@ fun ValorantNavigation(
             val viewModel: AgentsViewModel = koinInject()
             val uiState by viewModel.uiState.collectAsStateWithLifecycle()
             val uiEffect = viewModel.uiEffect
-            viewModel.getAgents()
+            LaunchedEffect(Unit) {
+                viewModel.getAgents()
+            }
             AgentsScreen(
                 uiState = uiState,
                 uiEffect = uiEffect,
@@ -69,7 +72,9 @@ fun ValorantNavigation(
             val viewModel: AgentDetailViewModel = koinInject()
             val uiState by viewModel.uiState.collectAsStateWithLifecycle()
             val uiEffect = viewModel.uiEffect
-            viewModel.getAgentDetail(agentId.orEmpty())
+            LaunchedEffect(Unit) {
+                viewModel.getAgentDetail(agentId.orEmpty())
+            }
             AgentDetailScreen(
                 uiState = uiState,
                 uiEffect = uiEffect,
@@ -81,7 +86,9 @@ fun ValorantNavigation(
             val viewModel: MapsViewModel = koinInject()
             val uiState by viewModel.uiState.collectAsStateWithLifecycle()
             val uiEffect = viewModel.uiEffect
-            viewModel.getMaps()
+            LaunchedEffect(Unit) {
+                viewModel.getMaps()
+            }
             MapsScreen(
                 uiState = uiState,
                 uiEffect = uiEffect,
@@ -96,7 +103,9 @@ fun ValorantNavigation(
             val viewModel: MapDetailViewModel = koinInject()
             val uiState by viewModel.uiState.collectAsStateWithLifecycle()
             val uiEffect = viewModel.uiEffect
-            viewModel.getMapDetail(mapId.orEmpty())
+            LaunchedEffect(Unit) {
+                viewModel.getMapDetail(mapId.orEmpty())
+            }
             MapDetailScreen(
                 uiState = uiState,
                 uiEffect = uiEffect,
@@ -108,7 +117,9 @@ fun ValorantNavigation(
             val viewModel: WeaponsViewModel = koinInject()
             val uiState by viewModel.uiState.collectAsStateWithLifecycle()
             val uiEffect = viewModel.uiEffect
-            viewModel.getWeapons()
+            LaunchedEffect(Unit) {
+                viewModel.getWeapons()
+            }
             WeaponsScreen(
                 uiState = uiState,
                 uiEffect = uiEffect,
@@ -123,7 +134,9 @@ fun ValorantNavigation(
             val viewModel: WeaponDetailViewModel = koinInject()
             val uiState by viewModel.uiState.collectAsStateWithLifecycle()
             val uiEffect = viewModel.uiEffect
-            viewModel.getWeaponDetail(weaponId.orEmpty())
+            LaunchedEffect(Unit) {
+                viewModel.getWeaponDetail(weaponId.orEmpty())
+            }
             WeaponDetailScreen(
                 uiState = uiState,
                 uiEffect = uiEffect,
@@ -135,7 +148,9 @@ fun ValorantNavigation(
             val viewModel: TiersViewModel = koinInject()
             val uiState by viewModel.uiState.collectAsStateWithLifecycle()
             val uiEffect = viewModel.uiEffect
-            viewModel.getTiers()
+            LaunchedEffect(Unit) {
+                viewModel.getTiers()
+            }
             TiersScreen(
                 uiState = uiState,
                 uiEffect = uiEffect,

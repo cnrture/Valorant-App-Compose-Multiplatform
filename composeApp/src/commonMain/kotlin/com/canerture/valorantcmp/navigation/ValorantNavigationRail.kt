@@ -14,17 +14,31 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.canerture.valorantcmp.common.NoRippleInteractionSource
+import com.canerture.valorantcmp.common.Routes
 import com.canerture.valorantcmp.presentation.theme.ValorantTheme
+import org.jetbrains.compose.resources.painterResource
+import valorantcmp.composeapp.generated.resources.Res
+import valorantcmp.composeapp.generated.resources.ic_agents
+import valorantcmp.composeapp.generated.resources.ic_maps
+import valorantcmp.composeapp.generated.resources.ic_tiers
+import valorantcmp.composeapp.generated.resources.ic_weapons
 
 @Composable
 fun ValorantNavigationRail(
     navController: NavController,
 ) {
+    val tabList = listOf(
+        NavItem(Routes.AGENTS, "Agents", Res.drawable.ic_agents),
+        NavItem(Routes.MAPS, "Maps", Res.drawable.ic_maps),
+        NavItem(Routes.WEAPONS, "Weapons", Res.drawable.ic_weapons),
+        NavItem(Routes.TIERS, "Tiers", Res.drawable.ic_tiers),
+    )
+
     NavigationRail {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentDestination = navBackStackEntry?.destination
 
-        TabList().forEach { screen ->
+        tabList.forEach { screen ->
             NavigationRailItem(
                 modifier = Modifier.padding(vertical = 16.dp),
                 selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
@@ -38,7 +52,7 @@ fun ValorantNavigationRail(
                     }
                 },
                 interactionSource = NoRippleInteractionSource(),
-                icon = { Icon(painter = screen.icon, contentDescription = null) },
+                icon = { Icon(painter = painterResource(screen.icon), contentDescription = null) },
                 label = { Text(screen.title) },
                 colors = NavigationRailItemColors(
                     selectedIconColor = ValorantTheme.colors.navColors.selectedIconColor,

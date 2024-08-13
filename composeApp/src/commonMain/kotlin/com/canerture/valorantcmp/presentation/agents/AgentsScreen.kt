@@ -28,6 +28,7 @@ import com.canerture.valorantcmp.common.carouselTransition
 import com.canerture.valorantcmp.common.collectWithLifecycle
 import com.canerture.valorantcmp.domain.model.AgentGroupUI
 import com.canerture.valorantcmp.presentation.components.ValorantImage
+import com.canerture.valorantcmp.presentation.components.ValorantProgressBar
 import com.canerture.valorantcmp.presentation.components.ValorantText
 import com.canerture.valorantcmp.presentation.theme.LocalWindowType
 import com.canerture.valorantcmp.presentation.theme.ValorantTheme
@@ -73,6 +74,8 @@ fun AgentsScreen(
             }
         )
     }
+
+    if (uiState.isLoading) ValorantProgressBar()
 }
 
 @Composable

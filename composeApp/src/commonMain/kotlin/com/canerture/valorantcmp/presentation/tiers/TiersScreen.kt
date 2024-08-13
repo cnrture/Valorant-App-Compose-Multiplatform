@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import com.canerture.valorantcmp.common.collectWithLifecycle
 import com.canerture.valorantcmp.domain.model.TierUI
+import com.canerture.valorantcmp.presentation.components.ValorantProgressBar
 import kotlinx.coroutines.flow.Flow
 
 @Composable
@@ -26,6 +27,8 @@ fun TiersScreen(
     TierListContent(
         tiers = uiState.tiers
     )
+
+    if (uiState.isLoading) ValorantProgressBar()
 }
 
 @Composable
