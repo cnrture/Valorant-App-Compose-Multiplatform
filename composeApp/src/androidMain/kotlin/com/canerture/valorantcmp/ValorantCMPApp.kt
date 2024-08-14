@@ -1,4 +1,4 @@
-package com.canerture.kotlinresources
+package com.canerture.valorantcmp
 
 import android.app.Application
 import com.canerture.valorantcmp.di.initKoin

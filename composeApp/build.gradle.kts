@@ -19,7 +19,6 @@ kotlin {
         compilations.all {
             kotlinOptions {
                 jvmTarget = "17"
-                kotlinOptions.freeCompilerArgs += "-Xcontext-receivers"
             }
         }
     }
@@ -35,10 +34,6 @@ kotlin {
             baseName = "ComposeApp"
             isStatic = true
         }
-    }
-
-    sourceSets.configureEach {
-        languageSettings.enableLanguageFeature("ExplicitBackingFields")
     }
 
     sourceSets {
@@ -172,7 +167,7 @@ buildkonfig {
         buildConfigField(
             FieldSpec.Type.STRING,
             "BASE_URL",
-            localProperties["base_url"]?.toString() ?: "",
+            localProperties["base_url"]?.toString().orEmpty(),
         )
     }
 }

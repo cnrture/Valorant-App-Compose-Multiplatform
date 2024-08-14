@@ -6,9 +6,15 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.dp
+import com.canerture.valorantcmp.Notify
 import com.canerture.valorantcmp.common.collectWithLifecycle
 import com.canerture.valorantcmp.domain.model.MapUI
+import com.canerture.valorantcmp.presentation.components.ValorantEmptyScreen
 import com.canerture.valorantcmp.presentation.components.ValorantProgressBar
 import kotlinx.coroutines.flow.Flow
 
@@ -19,24 +25,31 @@ fun MapsScreen(
     onAction: (MapsContract.UiAction) -> Unit,
     onNavigateMapDetail: (String) -> Unit
 ) {
+    var notifyShow by remember { mutableStateOf(false) }
+
     uiEffect.collectWithLifecycle { effect ->
         when (effect) {
             is MapsContract.UiEffect.GoToMapDetail -> onNavigateMapDetail(effect.id)
-
-            is MapsContract.UiEffect.ShowError -> {
-                // Show error
-            }
+            is MapsContract.UiEffect.ShowError -> notifyShow = true
         }
     }
 
-    MapListContent(
-        maps = uiState.maps,
-        onMapClick = { id ->
-            onAction(MapsContract.UiAction.OnMapClick(id))
+    if (notifyShow) {
+        Notify("Please try again later!") {
+            notifyShow = false
         }
-    )
+    }
 
-    if (uiState.isLoading) ValorantProgressBar()
+    when {
+        uiState.isLoading -> ValorantProgressBar()
+        uiState.maps.isEmpty() -> ValorantEmptyScreen()
+        else -> MapListContent(
+            maps = uiState.maps,
+            onMapClick = { id ->
+                onAction(MapsContract.UiAction.OnMapClick(id))
+            }
+        )
+    }
 }
 
 @Composable
@@ -57,4 +70,3 @@ fun MapListContent(
         }
     }
 }
-

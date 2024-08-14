@@ -28,7 +28,7 @@ fun ValorantEmptyScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(color = ValorantTheme.colors.primary),
+            .background(color = ValorantTheme.colors.secondary),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {

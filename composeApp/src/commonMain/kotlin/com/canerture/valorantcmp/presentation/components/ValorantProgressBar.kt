@@ -14,34 +14,36 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.canerture.valorantcmp.presentation.theme.ValorantTheme
+import org.jetbrains.compose.resources.stringResource
+import valorantcmp.composeapp.generated.resources.Res
+import valorantcmp.composeapp.generated.resources.progress_bar_animation
 
-private const val DURATION = 900
+private const val DURATION = 1000
 
 @Composable
 fun ValorantProgressBar() {
-    val progressValue = 1f
     val infiniteTransition = rememberInfiniteTransition(
-        label = "stringResource(R.string.progress_bar_transition)"
+        label = stringResource(Res.string.progress_bar_animation)
     )
 
     val progressAnimationValue by infiniteTransition.animateFloat(
         initialValue = 0.0f,
-        targetValue = progressValue,
+        targetValue = 1f,
         animationSpec = infiniteRepeatable(animation = tween(DURATION)),
-        label = "stringResource(R.string.progress_bar_animation)"
+        label = stringResource(Res.string.progress_bar_animation)
     )
 
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(ValorantTheme.colors.primary),
+            .background(ValorantTheme.colors.secondary),
         contentAlignment = Alignment.Center
     ) {
         CircularProgressIndicator(
             progress = { progressAnimationValue },
             modifier = Modifier
                 .wrapContentSize(),
-            color = ValorantTheme.colors.secondary,
+            color = ValorantTheme.colors.primary,
         )
     }
 }

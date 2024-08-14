@@ -37,7 +37,9 @@ fun ValorantNavigationBar(
         NavItem(Routes.TIERS, "Tiers", Res.drawable.ic_tiers),
     )
 
-    NavigationBar {
+    NavigationBar(
+        containerColor = ValorantTheme.colors.navColors.containerColor
+    ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentDestination = navBackStackEntry?.destination
 
